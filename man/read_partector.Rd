@@ -22,10 +22,9 @@ a tibble.
 Title
 }
 \examples{
-#' \dontrun{
+#'
+\dontrun{
 
-read_partector(path, tz = "America/New_York", metadata = FALSE
-
-)
+read_partector(path, tz = "America/New_York", metadata = FALSE)
 }
 }

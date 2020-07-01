@@ -1,6 +1,6 @@
 
 
-#' Title
+#' Import naneos Partector data
 #'
 #' @param path path of Partector output file.
 #' @param tz 	a character string that specifies which time zone to parse the

@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_partector.R
 \name{read_partector}
 \alias{read_partector}
-\title{Title}
+\title{Import naneos Partector data}
 \usage{
 read_partector(path, tz = "America/New_York", metadata = FALSE)
 }
@@ -19,7 +19,7 @@ number, and mass. Default = FALSE.}
 a tibble.
 }
 \description{
-Title
+Import naneos Partector data
 }
 \examples{
 #'

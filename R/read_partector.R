@@ -20,9 +20,11 @@
 read_partector <- function(path, tz = "America/New_York", metadata = FALSE) {
   d_raw <- readr::read_tsv(path, skip = 17, col_names = TRUE, col_types = readr::cols())
 
-  dt <- readr::read_lines(path)[8] %>%
-    stringr::str_replace_all(., "[[A-Za-z]:]", "") %>%
-    stringr::str_trim() %>%
+  dt <- readr::read_lines(path)[8]
+  dt <- stringr::str_split(dt, ' ') %>%
+    unlist()
+  dt <- dt[-1]
+  dt <- stringr::str_c(dt, collapse = ' ') %>%
     lubridate::dmy_hms(tz = tz) %>%
     tibble::enframe(name = NULL, value = "begin_dt")
 

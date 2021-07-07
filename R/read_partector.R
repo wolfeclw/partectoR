@@ -18,9 +18,15 @@
 #' read_partector(path, tz = "America/New_York", metadata = FALSE)
 #' }
 read_partector <- function(path, tz = "America/New_York", metadata = FALSE) {
-  d_raw <- readr::read_tsv(path, skip = 17, col_names = TRUE, col_types = readr::cols())
 
-  dt <- readr::read_lines(path)[8]
+  head_rws <- readr::read_lines(path)[1:20]
+  skp_rw <- which(stringr::str_detect(head_rws, '[[:digit:]:alpha:]') == FALSE)
+
+  time_rw <- which(stringr::str_detect(head_rws, 'Start:') == TRUE)
+
+  d_raw <- readr::read_tsv(path, skip = skp_rw, col_names = TRUE, col_types = readr::cols())
+
+  dt <- head_rws[time_rw]
   dt <- stringr::str_split(dt, ' ') %>%
     unlist()
   dt <- dt[-1]
@@ -40,7 +46,9 @@ read_partector <- function(path, tz = "America/New_York", metadata = FALSE) {
     dplyr::select(-c(time, t_minus, begin_dt)) %>%
     dplyr::select(Date_Time, Date, Time, everything())
 
-  if (metadata == FALSE) {
+  if (metadata == FALSE & 'PWMpump' %in% names(d_partector)) {
+    d_partector %>% dplyr::select(-c(A1:DV, P:PWMpump))
+  } else if (metadata == FALSE) {
     d_partector %>% dplyr::select(-c(A1:DV, P:Ipump))
   } else {
     d_partector

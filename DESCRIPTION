@@ -16,7 +16,8 @@ Imports:
     magrittr,
     readr,
     stringr,
-    tibble
+    tibble,
+    highcharter
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

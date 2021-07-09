@@ -4,16 +4,33 @@
 \alias{read_partector}
 \title{Import naneos Partector data}
 \usage{
-read_partector(path, tz = "America/New_York", metadata = FALSE)
+read_partector(
+  path,
+  tz = "America/New_York",
+  metadata = FALSE,
+  participant_id = NULL,
+  sample_col = NULL,
+  sample_id = NULL
+)
 }
 \arguments{
 \item{path}{path of Partector output file.}
 
-\item{tz}{a character string that specifies which time zone to parse the
+\item{tz}{character; specifies which time zone to parse the
 datetime. Default = 'America/New_York.'}
 
-\item{metadata}{include Partector output data in addition to LDSA, particle
-number, and mass. Default = FALSE.}
+\item{metadata}{logical; include Partector output data in addition to LDSA, particle
+number, and mass? Default = FALSE.}
+
+\item{participant_id}{user defined string to denote a personal identifier.
+This is useful if the Partector is deployed during personal sampling.  If specified,
+a new column is created ('ID'). Default is NULL.}
+
+\item{sample_col}{character; user defined character string specifying the name of the
+column to denote sample ID. Default is NULL.}
+
+\item{sample_id}{user defined string to denote sample ID. If assigned, a
+value must also be supplied to \code{sample_col}. Default is NULL.}
 }
 \value{
 a tibble.

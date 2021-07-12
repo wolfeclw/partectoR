@@ -39,7 +39,7 @@ a tibble.
 Import naneos Partector data
 }
 \examples{
-#'
+
 \dontrun{
 
 read_partector(path, tz = "America/New_York", metadata = FALSE)

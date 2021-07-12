@@ -38,13 +38,16 @@ a \emph{highchart}
 }
 \description{
 \code{plot_partector} creates an interactive Highchart to visualize Partector data.
-See (\code{\link[highcharter]})
 }
 \examples{
 \dontrun{
 
 plot_partector <- function(d, yvar = 'number', type = 'line', crosshairs = TRUE,
                            ymax = NULL, group_var = NULL, plot_alpha = 1)
-                           }
+}
 
+
+}
+\seealso{
+\url{https://jkunst.com/highcharter/}
 }

@@ -4,3 +4,5 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 partector_data
+test_funs
+^data-raw$

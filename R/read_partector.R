@@ -15,11 +15,13 @@
 #' @param sample_id user defined string to denote sample ID. If assigned, a
 #' value must also be supplied to `sample_col`. Default is NULL.
 #'
+#' @importFrom stats time
+#'
 #' @return a tibble.
 #' @export
 #'
 #' @examples
-#' #'
+#'
 #' \dontrun{
 #'
 #' read_partector(path, tz = "America/New_York", metadata = FALSE)
@@ -43,17 +45,18 @@ read_partector <- function(path, tz = "America/New_York", metadata = FALSE,
     lubridate::dmy_hms(tz = tz) %>%
     tibble::enframe(name = NULL, value = "begin_dt")
 
-  d_partector <- cbind(dt, d_raw)
+  d_partector <- dplyr::bind_cols(dt, d_raw)
 
   d_partector <- d_partector %>%
     dplyr::mutate(
       t_minus = time - 1,
       Date_Time = begin_dt + t_minus,
       Date = lubridate::date(Date_Time),
-      Time = hms::as_hms(Date_Time)
+      Time = hms::as_hms(Date_Time),
+      Time = chron::as.times(Time)
     ) %>%
     dplyr::select(-c(time, t_minus, begin_dt)) %>%
-    dplyr::select(Date_Time, Date, Time, everything())
+    dplyr::select(Date_Time, Date, Time, dplyr::everything())
 
   if (!is.null(sample_col) & !is.character(sample_col)) {
     stop("`sample_col` must be a character string.",

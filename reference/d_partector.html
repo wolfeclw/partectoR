@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Import naneos Partector data — read_partector • partectoR</title>
+<title>Partector data from one unit. — d_partector • partectoR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Import naneos Partector data — read_partector" />
-<meta property="og:description" content="Import naneos Partector data" />
+<meta property="og:title" content="Partector data from one unit. — d_partector" />
+<meta property="og:description" content="A dataset of Partector measurements recorded indoors. Elevated particle counts and
+LDSA correspond to cooking events. Measurements were aggregated to 5-second intervals
+using circleclust::dt_aggregate()." />
 
 
 
@@ -108,70 +110,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Import naneos Partector data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/wolfeclw/partectoR/blob/master/R/read_partector.R'><code>R/read_partector.R</code></a></small>
-    <div class="hidden name"><code>read_partector.Rd</code></div>
+    <h1>Partector data from one unit.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/wolfeclw/partectoR/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>d_partector.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Import naneos Partector data</p>
+    <p>A dataset of Partector measurements recorded indoors. Elevated particle counts and
+LDSA correspond to cooking events. Measurements were aggregated to 5-second intervals
+using <code><a href='https://rdrr.io/pkg/circleclust/man/dt_aggregate.html'>circleclust::dt_aggregate()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_partector</span><span class='op'>(</span>
-  <span class='va'>path</span>,
-  tz <span class='op'>=</span> <span class='st'>"America/New_York"</span>,
-  metadata <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  participant_id <span class='op'>=</span> <span class='cn'>NULL</span>,
-  sample_col <span class='op'>=</span> <span class='cn'>NULL</span>,
-  sample_id <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='va'>d_partector</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>path</th>
-      <td><p>path of Partector output file.</p></td>
-    </tr>
-    <tr>
-      <th>tz</th>
-      <td><p>character; specifies which time zone to parse the
-datetime. Default = 'America/New_York.'</p></td>
-    </tr>
-    <tr>
-      <th>metadata</th>
-      <td><p>logical; include Partector output data in addition to LDSA, particle
-number, and mass? Default = FALSE.</p></td>
-    </tr>
-    <tr>
-      <th>participant_id</th>
-      <td><p>user defined string to denote a personal identifier.
-This is useful if the Partector is deployed during personal sampling.  If specified,
-a new column is created ('ID'). Default is NULL.</p></td>
-    </tr>
-    <tr>
-      <th>sample_col</th>
-      <td><p>character; user defined character string specifying the name of the
-column to denote sample ID. Default is NULL.</p></td>
-    </tr>
-    <tr>
-      <th>sample_id</th>
-      <td><p>user defined string to denote sample ID. If assigned, a
-value must also be supplied to <code>sample_col</code>. Default is NULL.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>a tibble.</p>
+    <p>A data frame with 5344 rows and 12 variables:</p><dl>
+<dt>Date_Time</dt><dd><p>Datetime of measurements</p></dd>
+<dt>Unit</dt><dd><p>Character string indicating a specific Partector unit</p></dd>
+<dt>Date</dt><dd><p>Date of measurements</p></dd>
+<dt>Time</dt><dd><p>Time of measurements</p></dd>
+<dt>number</dt><dd><p>Particle number</p></dd>
+<dt>diam</dt><dd><p>Average particle diameter</p></dd>
+<dt>LDSA</dt><dd><p>Lung deposited surface area</p></dd>
+<dt>surface</dt><dd><p>Total surface area</p></dd>
+<dt>mass</dt><dd><p>Mass of particles smaller than 0.3 micrometers</p></dd>
+<dt>T</dt><dd><p>Internal temperature in Celcius</p></dd>
+<dt>RH</dt><dd><p>Internal relative humidity (%)</p></dd>
+<dt>error</dt><dd><p>current error status (0 = no error)</p></dd>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+</dl>
 
-<span class='fu'>read_partector</span><span class='op'>(</span><span class='va'>path</span>, tz <span class='op'>=</span> <span class='st'>"America/New_York"</span>, metadata <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

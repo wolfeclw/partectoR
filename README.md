@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-partectoR is a collection of R functions to import, format, and analyze ultrafine 
+partectoR is a collection of R functions to import, format, and analyze 
 particle measurements recorded by the naneos Partector.
 
 ## Installation

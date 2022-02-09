@@ -30,7 +30,7 @@ read_partector <- function(path, tz = "America/New_York", metadata = FALSE,
                            participant_id = NULL, sample_col = NULL,
                            sample_id = NULL) {
 
-  head_rws <- readr::read_lines(path)[1:20]
+  head_rws <- readr::read_lines(path, n_max = 20)
   skp_rw <- which(stringr::str_detect(head_rws, '[[:digit:]:alpha:]') == FALSE)
 
   time_rw <- which(stringr::str_detect(head_rws, 'Start:') == TRUE)
@@ -80,8 +80,21 @@ read_partector <- function(path, tz = "America/New_York", metadata = FALSE,
       dplyr::relocate(ID)
   }
 
+  ## SN
+
+  l_psn <- head_rws[1] %>% stringr::str_split(., ' ')
+  psn_wch <- purrr::map_dbl(l_psn, ~which(stringr::str_detect(., '^[:digit:]+$')))
+  psn <- purrr::map_chr(l_psn, psn_wch)
+
+  device_wch <- purrr::map_dbl(l_psn, ~which(stringr::str_detect(., stringr::regex('partector', ignore_case = TRUE))))
+  device_name <- purrr::map_chr(l_psn, device_wch)
+
+  d_partector$device_name <- device_name
+  d_partector$partector_sn <- psn
+
+
   if (metadata == FALSE & 'PWMpump' %in% names(d_partector)) {
-    d_partector %>% dplyr::select(-c(A1:DV, P:PWMpump))
+    d_partector %>% dplyr::select(-c(A1:DV, P:Ipump, PWMpump))
   } else if (metadata == FALSE) {
     d_partector %>% dplyr::select(-c(A1:DV, P:Ipump))
   } else {
